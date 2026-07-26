@@ -1,0 +1,27 @@
+spring:
+    application:
+        name: racingleague
+    datasource:
+        url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:racingleague}
+        username: ${DB_USERNAME:racing_user}
+        password: ${DB_PASSWORD:racing_pass}
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        properties:
+            hibernate:
+                format_sql: true
+        open-in-view: false
+
+server:
+    port: 8080
+
+team:
+    max-members: 3
+
+jwt:
+    secret: ${JWT_SECRET}
+    expiration: ${JWT_EXPIRATION:3600000}
+refresh-expiration: ${JWT_REFRESH_EXPIRATION:86400000}
+

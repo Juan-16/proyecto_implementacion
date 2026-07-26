@@ -1,0 +1,51 @@
+services:
+  db:
+    image: postgres:16
+    container_name: racingleague-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-racingleague}
+      POSTGRES_USER: ${DB_USERNAME:-racing_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-racing_pass}
+    ports:
+      - "5433:5432"
+    volumes:
+      - racingleague_data:/var/lib/postgresql/data
+    networks:
+      - racingleague-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-racing_user} -d ${DB_NAME:-racingleague}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: racingleague-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-racingleague}
+      DB_USERNAME: ${DB_USERNAME:-racing_user}
+      DB_PASSWORD: ${DB_PASSWORD:-racing_pass}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION:-3600000}
+      JWT_REFRESH_EXPIRATION: ${JWT_REFRESH_EXPIRATION:-86400000}
+    ports:
+      - "8080:8080"
+    networks:
+      - racingleague-net
+
+volumes:
+  racingleague_data:
+    name: racingleague_data
+
+networks:
+  racingleague-net:
+    name: racingleague-net
