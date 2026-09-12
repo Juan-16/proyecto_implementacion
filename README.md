@@ -7,7 +7,7 @@
 Sistema de información para la liga ficticia de carreras **EIA Camel vs. Dwarf**.
 Construido con **Java 21** y **Spring Boot**, con persistencia en **PostgreSQL**, autenticación **JWT** y autorización por roles.
 
-*Proyecto académico — Universidad EIA, curso de Backend Development*
+*Proyecto académico — Universidad EIA, Implementación de Software*
 
 [![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk&logoColor=white)](#)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?logo=springboot&logoColor=white)](#)
@@ -55,7 +55,7 @@ Construido con **Java 21** y **Spring Boot**, con persistencia en **PostgreSQL**
 
 ## 🏛️ Arquitectura
 
-El backend sigue una arquitectura en capas estricta:
+El backend sigue una arquitectura en capas:
 
 ```
 Controller  →  Service  →  Repository  →  Base de datos
@@ -256,8 +256,6 @@ JWT_EXPIRATION=3600000
 JWT_REFRESH_EXPIRATION=86400000
 ```
 
-> ⚠️ **Nunca** subas el `.env` real a GitHub. Está excluido en `.gitignore`. Solo `.env.example` (sin valores reales) se versiona.
-
 ---
 
 ## 🚀 Cómo levantar el proyecto
@@ -309,7 +307,7 @@ DB_PORT=5433
 
 **3.** Corre `RacingleagueApplication` desde IntelliJ.
 
-La API queda disponible en `http://localhost:8080` 🎉
+La API queda disponible en `http://localhost:8080`
 
 ---
 
@@ -474,6 +472,6 @@ feature/frontend        → interfaz gráfica
 
 <div align="center">
 
-*Universidad EIA — Curso de Backend Development* 🎓
+*Universidad EIA — Implementación de Software* 🎓
 
 </div>
