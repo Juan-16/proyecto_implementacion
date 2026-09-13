@@ -55,6 +55,12 @@ export function AuthProvider({ children }) {
     isAuthenticated: status === "authenticated",
     isChecking: status === "checking",
     hasRole: (role) => user?.roles?.includes(role) ?? false,
+    // Acepta un solo rol o un arreglo de roles; true si el usuario tiene
+    // al menos uno. Usado por nav items y rutas con más de un rol permitido.
+    hasAnyRole: (roleOrRoles) => {
+      const required = Array.isArray(roleOrRoles) ? roleOrRoles : [roleOrRoles];
+      return required.some((r) => user?.roles?.includes(r));
+    },
     login,
     logout,
   };

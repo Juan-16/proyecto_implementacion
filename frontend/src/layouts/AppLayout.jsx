@@ -3,9 +3,9 @@ import { useAuth } from "../context/AuthContext";
 import { NAV_ITEMS, ROLE_LABELS } from "./navItems";
 
 export default function AppLayout({ children }) {
-  const { user, roles, hasRole, logout } = useAuth();
+  const { user, roles, hasAnyRole, logout } = useAuth();
   const visibleItems = NAV_ITEMS.filter(
-    (item) => !item.requiredRole || hasRole(item.requiredRole)
+    (item) => !item.requiredRole || hasAnyRole(item.requiredRole)
   );
 
   return (

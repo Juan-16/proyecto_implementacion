@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 // Se usará a partir del dashboard en adelante:
 // <Route element={<ProtectedRoute />}><Route path="/dashboard" ... /></Route>
 export default function ProtectedRoute({ children, requiredRole }) {
-  const { isAuthenticated, isChecking, hasRole } = useAuth();
+  const { isAuthenticated, isChecking, hasAnyRole } = useAuth();
 
   if (isChecking) {
     return (
@@ -18,7 +18,7 @@ export default function ProtectedRoute({ children, requiredRole }) {
     return <Navigate to="/login" replace />;
   }
 
-  if (requiredRole && !hasRole(requiredRole)) {
+  if (requiredRole && !hasAnyRole(requiredRole)) {
     return <Navigate to="/acceso-denegado" replace />;
   }
 
